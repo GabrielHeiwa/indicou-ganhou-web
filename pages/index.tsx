@@ -60,7 +60,7 @@ export default function Index() {
                 nome_do_indicador={indication.indications_nome_do_indicador}
                 telefone_do_indicado={indication.indications_telefone_do_indicado}>
                 <button id={indication.indications_uuid}
-                    onClick={(e) => handle_delete_indication(e.target.id)}>
+                    onClick={(e) => handle_delete_indication(e.currentTarget.id)}>
                     Deletar</button>
             </Indication_Components>
 
