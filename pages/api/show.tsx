@@ -1,22 +1,24 @@
 import conn from "../../connection";
 import { NextApiRequest, NextApiResponse } from "next";
+import { Cursor } from "mongodb";
 
 export default async function show(req: NextApiRequest, res: NextApiResponse) {
     try {
-        const indications = conn
-            .connect(db => {
-                let t = conn
+        let data = await new Promise((resolve, reject) =>
+            conn.connect(async db => {
+                const d = await conn
                     .db("engfor")
                     .collection("indications")
                     .find({})
+                    .toArray();
 
-            });
+                resolve(d);
+            }));
 
-        console.log(indications);
 
         return res.json({
             status: 200,
-            indications,
+            indications: data,
             msg: "Dados coletados com sucesso!",
         });
 
