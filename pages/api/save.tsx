@@ -1,21 +1,22 @@
 
 import { NextApiRequest, NextApiResponse } from "next";
 import conn from "../../connection";
-export default async function (req: NextApiRequest, res: NextApiResponse) {
+async function save(req: NextApiRequest, res: NextApiResponse) {
+    
     try {
-        const save_status: {status: "ok" | "fail", msg: string} = await new Promise((resolve, reject) => conn.connect(async err => {
+        const save_status: { status: "ok" | "fail", msg: string } = await new Promise((resolve, reject) => conn.connect(async err => {
             if (err) return console.error(err);
 
             try {
                 await conn
-                .db("engfor")
-                .collection("indications")
-                .insertOne(req.body);
+                    .db("engfor")
+                    .collection("indications")
+                    .insertOne(req.body);
                 return resolve({
                     status: "ok",
                     msg: "Indicação inserida com sucesso!",
                 });
-            } catch(err) {
+            } catch (err) {
                 return resolve({
                     status: "fail",
                     msg: "Erro ao inserir indicação!",
@@ -24,7 +25,7 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
 
         }));
 
-        if (save_status.status === "ok" ) {
+        if (save_status.status === "ok") {
             return res.json({
                 status: 200,
                 msg: save_status.msg,
@@ -48,6 +49,24 @@ export default async function (req: NextApiRequest, res: NextApiResponse) {
             err,
         });
     }
+};
 
-
+const allowCors = fn => async (req, res) => {
+    res.setHeader('Access-Control-Allow-Credentials', true)
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    // another common pattern
+    // res.setHeader('Access-Control-Allow-Origin', req.headers.origin);
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+    res.setHeader(
+        'Access-Control-Allow-Headers',
+        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+    )
+    if (req.method === 'OPTIONS') {
+        res.status(200).end()
+        return
+    }
+    return await fn(req, res)
 }
+
+
+export default allowCors(save);

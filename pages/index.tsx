@@ -7,7 +7,7 @@ interface indications_data {
     nome_do_indicador: string;
     nome_do_indicado: string;
     telefone_do_indicado: string;
-    fatura_do_indicado: string;
+    url_imagem: string;
     longitude_do_indicado: string;
     latitude_do_indicado: string;
     descricao_do_indicado: string;
@@ -53,7 +53,7 @@ export default function Index() {
             <Indication_Components
                 key={indication._id}
                 descricao_do_indicado={indication.descricao_do_indicado}
-                fatura_do_indicado={indication.fatura_do_indicado}
+                fatura_do_indicado={indication.url_imagem}
                 latitude_do_indicado={indication.latitude_do_indicado}
                 longitude_do_indicado={indication.longitude_do_indicado}
                 nome_do_indicado={indication.nome_do_indicado}

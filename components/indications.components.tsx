@@ -20,6 +20,7 @@ export default function Indication_Components({
         <p>{nome_do_indicado}</p>
         <p>{telefone_do_indicado}</p>
         <p>{descricao_do_indicado}</p>
+        <a href={fatura_do_indicado} target="_blank">Fatura</a>
         <a href={location} target="_blank">Localização</a>
         {children}
     </div>
