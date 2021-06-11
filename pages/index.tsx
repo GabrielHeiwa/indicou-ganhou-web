@@ -30,6 +30,8 @@ export default function Index() {
             if (data.status === 200)
                 return set_indications(curr => data.indications);
 
+            console.log(data.indications);
+
             return alert("Erro ao coletar as indicações!");
         })();
 
