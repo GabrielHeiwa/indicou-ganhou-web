@@ -49,6 +49,15 @@ export default function Index() {
     };
 
     return <div className="indication-container">
+        <div className="indication-titles">
+            <span>Indicador</span>
+            <span>Indicado</span>
+            <span>Telefone</span>
+            <span>Descrição</span>
+            <span>Foto da Fatura</span>
+            <span>Localização</span>
+            <span>Deletar</span>
+        </div>
         {indications.map(indication => (
             <Indication_Components
                 key={indication._id}

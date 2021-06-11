@@ -20,3 +20,27 @@ div.indication {
     align-items: center;
 
 }
+
+div.indication-titles {
+    height: 10vh;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+div.indication * {
+    width: calc(100%/7);
+    text-align: center
+}
+
+div.indication button {
+    margin: calc(100%/7 - 1%);
+    margin: 0 .5% 0 .5%
+}
+
+div.indication-titles span {
+    width: calc(100%/7);
+    text-align: center;
+}
